@@ -25,10 +25,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       course_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull:false
       },
       batch_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull:false
       },
       createdAt: {
         allowNull: false,
