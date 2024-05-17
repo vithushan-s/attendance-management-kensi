@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Batch extends Model {
+  class batch extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,11 +13,13 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Batch.init({
-    year: DataTypes.INTEGER
+  batch.init({
+    register_year: DataTypes.INTEGER,
+    academic_start_date: DataTypes.DATE,
+    course_id: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Batch',
+    modelName: 'batch',
   });
-  return Batch;
+  return batch;
 };

@@ -2,30 +2,30 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Lecturers', {
+    await queryInterface.createTable('subjects', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      firstname: {
+      code: {
         type: Sequelize.STRING
       },
-      lastname: {
+      name: {
         type: Sequelize.STRING
       },
-      designation: {
-        type: Sequelize.STRING
+      credit: {
+        type: Sequelize.INTEGER
       },
-      typeOfAppointment: {
-        type: Sequelize.STRING
+      year: {
+        type: Sequelize.INTEGER
       },
-      mobile: {
-        type: Sequelize.STRING
+      semester: {
+        type: Sequelize.INTEGER
       },
-      email: {
-        type: Sequelize.STRING
+      course_id: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -38,6 +38,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Lecturers');
+    await queryInterface.dropTable('subjects');
   }
 };
