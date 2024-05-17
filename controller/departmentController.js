@@ -1,72 +1,107 @@
-const Department = require('../database/models/department');
+const Models = require('../database/models/index');
 
 // Get App faculties
-exports.getAllFaculties = async (req,res) =>{
+exports.getAllDepartments = async (req,res) =>{
     try {
-        const faculties = await Department.find();
-        res.status(200).json(faculties);
+        const departments = await Models.department.findAll();
+        res.status(200).json(departments);
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching all departments', error });
+        res.status(500).json({ 
+            message: 'Failed to fetching all departments', 
+            error 
+        });
     }
 }
 
 //Get one single department
 exports.getDepartment = async (req,res,next)=>{
-    const department = await Department.findById(req.params.id);
-    if(!department){
-        return res.status(404).json({
-            success:false,
-            message:'Department Not Found!'
+    try {
+        const department = await Models.department.findById(req.params.id);
+        if(!department){
+            return res.status(404).json({
+                success:false,
+                message:'Faculty Not Found!'
+            })
+        }
+        res.status(201).json({
+            success:true,
+            department
         })
+    } catch (error) {
+        res.status(500).json({ 
+            message: 'Failed to fetching department', 
+            error 
+        });
     }
-    res.status(201).json({
-        success:true,
-        department
-    })
+    
 }
 
  // Create new department
 exports.newDepartment = async (req,res)=>{
-    const department = await Department.create(req.body)
-    res.status(201).json({
-        success:true,
-        department
-    })
+    try {
+        const department = await Models.department.create(req.body);
+        res.status(201).json({
+            success:true,
+            message:'Faculty create successfully!',
+            department
+        })
+    } catch (error) {
+        res.status(500).json({ 
+            message: 'Failed to create department', 
+            error: error.message 
+        });
+    }
+   
 }
 
 //update department
 exports.updateDepartment = async (req,res) => {
-    let department = await Department.findById(req.params.id);
-    if(!department){
-        return res.status(404).json({
-            success:false,
-            message:'Department Not Found!'
+    try {
+        let department = await Models.department.findById(req.params.id);
+        if(!department){
+            return res.status(404).json({
+                success:false,
+                message:'Faculty Not Found!'
+            })
+        }
+        department = await Models.department.findByIdAndUpdate(req.params.id,req.body,{
+            new:true
         })
+        res.status(200).json({
+            success:true,
+            message:'Faculty update successfuly!',
+            department
+        })
+    } catch (error) {
+        res.status(500).json({ 
+            message: 'Failed to update department', 
+            error: error.message 
+        });
     }
-    department = await Department.findByIdAndUpdate(req.params.id,req.body,{
-        new:true
-    })
-    res.status(200).json({
-        success:true,
-        department
-    })
-
+   
 }
 
-//Delete Department
+//Delete Faculty
 exports.deleteDepartment = async (req,res) => {
-    const department = await Department.findById(req.params.id);
-    if(!department){
-        return res.status(404).json({
-            success:false,
-            message:'Department Not Found!'
+    try {
+        const department = await Models.department.findById(req.params.id);
+        if(!department){
+            return res.status(404).json({
+                success:false,
+                message:'Faculty Not Found!'
+            })
+        }
+        await department.remove();
+
+        res.status(200).json({
+            success:true,
+            message:'Faculty deleted.'
         })
+    } catch (error) {
+        res.status(500).json({ 
+            message: 'Failed to delete department', 
+            error: error.message 
+        });
     }
-
-    await department.remove();
-
-    res.status(200).json({
-        success:true,
-        message:'Department delete successsfully'
-    })
+    
 }

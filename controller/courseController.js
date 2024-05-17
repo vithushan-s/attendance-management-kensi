@@ -1,80 +1,80 @@
 const Models = require('../database/models/index');
 
 // Get App faculties
-exports.getAllFaculties = async (req,res) =>{
+exports.getAllCourses = async (req,res) =>{
     try {
-        const faculties = await Models.faculty.findAll();
-        res.status(200).json(faculties);
+        const courses = await Models.course.findAll();
+        res.status(200).json(courses);
     } catch (error) {
         res.status(500).json({ 
-            message: 'Failed to fetching all faculties', 
+            message: 'Failed to fetching all courses', 
             error 
         });
     }
 }
 
-//Get one single faculty
-exports.getFaculty = async (req,res,next)=>{
+//Get one single course
+exports.getCourse = async (req,res,next)=>{
     try {
-        const faculty = await Models.faculty.findById(req.params.id);
-        if(!faculty){
+        const course = await Models.course.findById(req.params.id);
+        if(!course){
             return res.status(404).json({
                 success:false,
-                message:'Faculty Not Found!'
+                message:'Course Not Found!'
             })
         }
         res.status(201).json({
             success:true,
-            faculty
+            course
         })
     } catch (error) {
         res.status(500).json({ 
-            message: 'Failed to fetching faculty', 
+            message: 'Failed to fetching course', 
             error 
         });
     }
     
 }
 
- // Create new faculty
-exports.newFaculty = async (req,res)=>{
+ // Create new course
+exports.newCourse = async (req,res)=>{
     try {
-        const faculty = await Models.faculty.create(req.body);
+        const course = await Models.course.create(req.body);
         res.status(201).json({
             success:true,
-            message:'Faculty create successfully!',
-            faculty
+            message:'Course create successfully!',
+            course
         })
     } catch (error) {
         res.status(500).json({ 
-            message: 'Failed to create faculty', 
+            message: 'Failed to create course', 
             error: error.message 
         });
     }
    
 }
 
-//update faculty
-exports.updateFaculty = async (req,res) => {
+//update course
+exports.updateCourse = async (req,res) => {
     try {
-        let faculty = await Models.faculty.findById(req.params.id);
-        if(!faculty){
+        let course = await Models.course.findById(req.params.id);
+        if(!course){
             return res.status(404).json({
                 success:false,
-                message:'Faculty Not Found!'
+                message:'Course Not Found!'
             })
         }
-        faculty = await Models.faculty.findByIdAndUpdate(req.params.id,req.body,{
+        course = await Models.course.findByIdAndUpdate(req.params.id,req.body,{
             new:true
         })
         res.status(200).json({
             success:true,
-            message:'Faculty update successfuly!',
-            faculty
+            message:'Course update successfuly!',
+            course
         })
     } catch (error) {
         res.status(500).json({ 
-            message: 'Failed to update faculty', 
+            message: 'Failed to update course', 
             error: error.message 
         });
     }
@@ -82,16 +82,16 @@ exports.updateFaculty = async (req,res) => {
 }
 
 //Delete Faculty
-exports.deleteFaculty = async (req,res) => {
+exports.deleteCourse = async (req,res) => {
     try {
-        const faculty = await Models.faculty.findById(req.params.id);
-        if(!faculty){
+        const course = await Models.course.findById(req.params.id);
+        if(!course){
             return res.status(404).json({
                 success:false,
                 message:'Faculty Not Found!'
             })
         }
-        await faculty.remove();
+        await course.remove();
 
         res.status(200).json({
             success:true,
@@ -99,7 +99,7 @@ exports.deleteFaculty = async (req,res) => {
         })
     } catch (error) {
         res.status(500).json({ 
-            message: 'Failed to delete faculty', 
+            message: 'Failed to delete course', 
             error: error.message 
         });
     }
