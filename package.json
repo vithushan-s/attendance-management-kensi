@@ -4,13 +4,14 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon index.js -q",
-    "migration:up" : "npx sequelize-cli db:migrate",
-    "migration:undo" : "npx sequelize-cli db:migrate:undo"
+    "start": "nodemon server.js -q",
+    "migration:up": "npx sequelize-cli db:migrate",
+    "migration:undo": "npx sequelize-cli db:migrate:undo"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "mysql2": "^3.9.7",

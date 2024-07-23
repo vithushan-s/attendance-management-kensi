@@ -10,21 +10,27 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       code: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       credit: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       year: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       semester: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       course_id: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         allowNull:false
       },

@@ -10,10 +10,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       code: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING
+      },
+      faculty_id:{
+        allowNull:false,
+        type:Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

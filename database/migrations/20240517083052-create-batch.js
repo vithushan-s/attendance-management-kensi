@@ -10,9 +10,11 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       register_year: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       academic_start_date: {
+        allowNull: false,
         type: Sequelize.DATE
       },
       course_id: {
